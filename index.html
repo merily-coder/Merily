@@ -41,6 +41,11 @@
     img { max-width: 100%; display: block; }
     a { color: inherit; text-decoration: none; }
     button { font-family: inherit; cursor: pointer; border: none; background: none; }
+    input, textarea, select {
+      font-family: inherit;
+      font-size: 1rem;
+      color: var(--color-brown);
+    }
 
     .container {
       width: min(100% - 2rem, 1080px);
@@ -249,6 +254,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      gap: 0.4rem;
       background: transparent;
       color: var(--color-brown);
       border: 1.5px solid var(--color-pink);
@@ -289,15 +295,14 @@
     /* ========== CATEGORÍAS ========== */
     .categories {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.5rem 0.9rem;
-      max-width: 480px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.4rem 0.9rem;
+      max-width: 420px;
       margin-inline: auto;
     }
     @media (min-width: 600px) {
       .categories {
-        grid-template-columns: repeat(4, 1fr);
-        max-width: 640px;
+        max-width: 520px;
         gap: 1.4rem;
       }
     }
@@ -440,280 +445,117 @@
     }
     .btn-add:hover { background: var(--color-pink-light); }
 
-    /* ========== CÓMO PEDIR ========== */
-    .how-to {
-      background: var(--color-cream-light);
-      border-radius: var(--radius-xl);
-      border: 1px solid var(--color-pink-light);
-      padding: 1.8rem 1.4rem;
-      text-align: center;
-      max-width: 480px;
-      margin-inline: auto;
-    }
-    .how-to h3 {
-      font-family: var(--font-heading);
-      font-size: 1.4rem;
-      font-weight: 600;
-      margin-bottom: 0.6rem;
-    }
-    .how-to p {
-      color: var(--color-brown-soft);
-      margin-bottom: 0.4rem;
-      font-size: 0.95rem;
-    }
-    .how-to .example {
-      display: inline-block;
-      background: var(--color-pink-light);
-      color: var(--color-brown);
-      font-family: var(--font-heading);
-      font-weight: 600;
-      font-size: 1.02rem;
-      padding: 0.5rem 1.1rem;
-      border-radius: var(--radius-md);
-      margin-top: 0.7rem;
-    }
-
-    /* ========== CARRITO MEJORADO ========== */
-    .order-section {
-      background: linear-gradient(180deg, var(--color-cream) 0%, var(--color-cream-light) 100%);
-    }
-    .order-box {
+    /* ========== ENVÍOS / DIRECCIÓN ========== */
+    .delivery-box {
       background: var(--color-white);
       border: 1px solid var(--color-pink-light);
       border-radius: var(--radius-xl);
-      padding: 1.5rem 1.25rem 1.4rem;
+      padding: 1.6rem 1.35rem;
       max-width: 520px;
       margin-inline: auto;
       box-shadow: var(--shadow-soft);
     }
-    .order-box > h3 {
+    .delivery-box h3 {
       font-family: var(--font-heading);
-      font-size: 1.4rem;
+      font-size: 1.35rem;
       font-weight: 600;
       text-align: center;
-      margin-bottom: 1.15rem;
-    }
-
-    .order-empty {
-      text-align: center;
-      color: var(--color-brown-soft);
-      padding: 1.8rem 0.5rem;
-      font-size: 0.95rem;
-    }
-    .order-empty svg {
-      width: 48px;
-      height: 48px;
-      margin: 0 auto 0.75rem;
-      opacity: 0.45;
-    }
-
-    .order-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      margin-bottom: 0.5rem;
-    }
-
-    .order-item {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 0.35rem 0.75rem;
-      padding: 0.9rem 0;
-      border-bottom: 1px solid var(--color-pink-light);
-      align-items: start;
-    }
-    .order-item:last-child { border-bottom: none; }
-
-    .order-item-info { min-width: 0; }
-    .order-item-code {
-      font-family: var(--font-heading);
-      font-weight: 700;
-      font-size: 0.95rem;
-      color: var(--color-brown);
-    }
-    .order-item-name {
-      font-size: 0.9rem;
-      color: var(--color-brown-soft);
-      line-height: 1.35;
-      margin-top: 0.1rem;
-    }
-    .order-item-unit {
-      font-size: 0.8rem;
-      color: var(--color-brown-soft);
-      margin-top: 0.15rem;
-    }
-
-    .order-item-right {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 0.45rem;
-    }
-    .order-item-subtotal {
-      font-family: var(--font-heading);
-      font-weight: 700;
-      font-size: 1.05rem;
-    }
-
-    .qty-controls {
-      display: flex;
-      align-items: center;
-      gap: 0.35rem;
-      background: var(--color-cream);
-      border: 1px solid var(--color-pink-light);
-      border-radius: var(--radius-pill);
-      padding: 0.2rem;
-    }
-    .qty-btn {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      color: var(--color-brown);
-      font-size: 1rem;
-      font-weight: 600;
-      transition: background 150ms ease;
-      line-height: 1;
-    }
-    .qty-btn:hover { background: var(--color-pink-light); }
-    .qty-value {
-      min-width: 22px;
-      text-align: center;
-      font-weight: 600;
-      font-size: 0.9rem;
-    }
-    .btn-remove {
-      font-size: 0.75rem;
-      color: var(--color-brown-soft);
-      text-decoration: underline;
-      padding: 0.15rem 0;
-      transition: color 150ms ease;
-    }
-    .btn-remove:hover { color: var(--color-error, #A65D5D); }
-
-    .order-summary {
-      margin-top: 0.75rem;
-      padding-top: 1rem;
-      border-top: 2px solid var(--color-pink);
-    }
-    .summary-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.92rem;
-      color: var(--color-brown-soft);
       margin-bottom: 0.35rem;
     }
-    .summary-row.total {
-      margin-top: 0.5rem;
-      padding-top: 0.6rem;
-      border-top: 1px dashed var(--color-pink-light);
-      font-family: var(--font-heading);
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--color-brown);
-    }
-    .summary-row.total span:last-child {
-      font-size: 1.4rem;
+    .delivery-box > p {
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--color-brown-soft);
+      margin-bottom: 1.35rem;
     }
 
-    .order-actions {
+    .form-field {
       display: flex;
       flex-direction: column;
-      gap: 0.65rem;
-      margin-top: 1.25rem;
+      gap: 0.35rem;
+      margin-bottom: 1rem;
     }
-    .order-actions .btn-primary,
-    .order-actions .btn-secondary {
-      width: 100%;
+    .form-field label {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--color-brown);
     }
-
-    .order-note {
-      text-align: center;
-      font-size: 0.82rem;
+    .form-field .hint {
+      font-size: 0.78rem;
       color: var(--color-brown-soft);
-      margin-top: 0.85rem;
-      line-height: 1.4;
+      font-weight: 400;
+    }
+    .input, .textarea {
+      width: 100%;
+      box-sizing: border-box;
+      background: var(--color-cream-light);
+      color: var(--color-brown);
+      border: 1px solid var(--color-pink);
+      border-radius: var(--radius-md);
+      padding: 0.7rem 0.95rem;
+      font-size: 0.95rem;
+      transition: border-color 180ms ease, background 180ms ease;
+    }
+    .input:focus, .textarea:focus {
+      outline: none;
+      border-color: var(--color-pink);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(232, 169, 172, 0.25);
+    }
+    .textarea {
+      min-height: 88px;
+      resize: vertical;
+    }
+    ::placeholder {
+      color: var(--color-brown-soft);
+      opacity: 0.7;
     }
 
-    /* ========== INFO ========== */
-    .info-cards {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1.1rem;
-      max-width: 640px;
-      margin-inline: auto;
+    .maps-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 0.5rem;
     }
-    @media (min-width: 560px) {
-      .info-cards { grid-template-columns: repeat(2, 1fr); }
+    .maps-actions .btn-secondary {
+      padding: 0.55rem 1rem;
+      font-size: 0.85rem;
+      min-height: 40px;
     }
-    .info-card {
+
+    .map-preview {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-pink-light);
+      overflow: hidden;
+      background: var(--color-cream-light);
+      margin-top: 0.5rem;
+      display: none;
+    }
+    .map-preview.active { display: block; }
+    .map-preview iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .delivery-saved {
+      display: none;
       background: var(--color-cream-light);
       border: 1px solid var(--color-pink-light);
-      border-radius: var(--radius-lg);
-      padding: 1.35rem 1.15rem;
-      text-align: center;
-    }
-    .info-card h4 {
-      font-family: var(--font-heading);
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin-bottom: 0.4rem;
-    }
-    .info-card p {
-      font-size: 0.92rem;
-      color: var(--color-brown-soft);
-    }
-
-    /* ========== FOOTER ========== */
-    .footer {
-      padding: 2.2rem 0 1.8rem;
-      border-top: 1px solid var(--color-pink-light);
-      text-align: center;
-    }
-    .footer-logo {
-      font-family: var(--font-heading);
-      font-size: 1.4rem;
-      font-weight: 600;
-      margin-bottom: 0.3rem;
-    }
-    .footer p { font-size: 0.88rem; color: var(--color-brown-soft); }
-    .footer-handle {
-      font-family: var(--font-heading);
-      font-size: 1rem;
-      color: var(--color-pink);
-      margin-top: 0.6rem;
-      display: inline-block;
-    }
-
-    /* ========== TOAST ========== */
-    .toast {
-      position: fixed;
-      bottom: 1.4rem;
-      left: 50%;
-      transform: translateX(-50%) translateY(120px);
-      background: var(--color-brown);
-      color: var(--color-cream);
-      padding: 0.75rem 1.3rem;
-      border-radius: var(--radius-pill);
+      border-radius: var(--radius-md);
+      padding: 0.85rem 1rem;
+      margin-top: 0.75rem;
       font-size: 0.88rem;
-      font-weight: 500;
-      opacity: 0;
-      transition: transform 280ms ease, opacity 280ms ease;
-      z-index: 300;
-      pointer-events: none;
-      max-width: min(90vw, 360px);
-      text-align: center;
-      line-height: 1.35;
     }
-    .toast.show {
-      transform: translateX(-50%) translateY(0);
-      opacity: 1;
+    .delivery-saved.active { display: block; }
+    .delivery-saved strong {
+      font-family: var(--font-heading);
+      font-weight: 600;
     }
 
-    /* ========== DRAWER CARRITO (mobile friendly) ========== */
+    /* ========== CARRITO ========== */
     .cart-overlay {
       position: fixed;
       inset: 0;
@@ -779,6 +621,209 @@
       background: var(--color-cream-light);
       flex-shrink: 0;
     }
+
+    .order-empty {
+      text-align: center;
+      color: var(--color-brown-soft);
+      padding: 1.8rem 0.5rem;
+      font-size: 0.95rem;
+    }
+    .order-empty svg {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 0.75rem;
+      opacity: 0.45;
+    }
+
+    .order-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-bottom: 0.5rem;
+    }
+    .order-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.35rem 0.75rem;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--color-pink-light);
+      align-items: start;
+    }
+    .order-item:last-child { border-bottom: none; }
+    .order-item-info { min-width: 0; }
+    .order-item-code {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+    .order-item-name {
+      font-size: 0.9rem;
+      color: var(--color-brown-soft);
+      line-height: 1.35;
+      margin-top: 0.1rem;
+    }
+    .order-item-unit {
+      font-size: 0.8rem;
+      color: var(--color-brown-soft);
+      margin-top: 0.15rem;
+    }
+    .order-item-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.45rem;
+    }
+    .order-item-subtotal {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+    .qty-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: var(--color-cream);
+      border: 1px solid var(--color-pink-light);
+      border-radius: var(--radius-pill);
+      padding: 0.2rem;
+    }
+    .qty-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: var(--color-brown);
+      font-size: 1rem;
+      font-weight: 600;
+      transition: background 150ms ease;
+      line-height: 1;
+    }
+    .qty-btn:hover { background: var(--color-pink-light); }
+    .qty-value {
+      min-width: 22px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    .btn-remove {
+      font-size: 0.75rem;
+      color: var(--color-brown-soft);
+      text-decoration: underline;
+      padding: 0.15rem 0;
+      transition: color 150ms ease;
+    }
+    .btn-remove:hover { color: #A65D5D; }
+
+    .order-summary {
+      margin-top: 0.25rem;
+      padding-top: 0.25rem;
+    }
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.92rem;
+      color: var(--color-brown-soft);
+      margin-bottom: 0.35rem;
+    }
+    .summary-row.total {
+      margin-top: 0.5rem;
+      padding-top: 0.6rem;
+      border-top: 2px solid var(--color-pink);
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--color-brown);
+    }
+    .summary-row.total span:last-child { font-size: 1.4rem; }
+
+    .delivery-preview {
+      background: var(--color-cream);
+      border: 1px solid var(--color-pink-light);
+      border-radius: var(--radius-md);
+      padding: 0.7rem 0.85rem;
+      margin-bottom: 0.85rem;
+      font-size: 0.82rem;
+      color: var(--color-brown-soft);
+      line-height: 1.4;
+    }
+    .delivery-preview strong {
+      display: block;
+      font-family: var(--font-heading);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--color-brown);
+      margin-bottom: 0.2rem;
+    }
+    .delivery-preview.missing {
+      border-style: dashed;
+      color: var(--color-brown-soft);
+    }
+
+    .order-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      margin-top: 0.85rem;
+    }
+    .order-actions .btn-primary,
+    .order-actions .btn-secondary { width: 100%; }
+
+    .order-note {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--color-brown-soft);
+      margin-top: 0.75rem;
+      line-height: 1.4;
+    }
+
+    /* ========== FOOTER ========== */
+    .footer {
+      padding: 2.2rem 0 1.8rem;
+      border-top: 1px solid var(--color-pink-light);
+      text-align: center;
+    }
+    .footer-logo {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+    .footer p { font-size: 0.88rem; color: var(--color-brown-soft); }
+    .footer-handle {
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      color: var(--color-pink);
+      margin-top: 0.6rem;
+      display: inline-block;
+    }
+
+    /* ========== TOAST ========== */
+    .toast {
+      position: fixed;
+      bottom: 1.4rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(120px);
+      background: var(--color-brown);
+      color: var(--color-cream);
+      padding: 0.75rem 1.3rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.88rem;
+      font-weight: 500;
+      opacity: 0;
+      transition: transform 280ms ease, opacity 280ms ease;
+      z-index: 300;
+      pointer-events: none;
+      max-width: min(90vw, 360px);
+      text-align: center;
+      line-height: 1.35;
+    }
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
   </style>
 </head>
 <body>
@@ -796,7 +841,6 @@
 
         <nav class="nav" aria-label="Navegación principal">
           <a href="#productos" class="nav-link">Productos</a>
-          <a href="#como-pedir" class="nav-link">Cómo pedir</a>
           <a href="#envios" class="nav-link">Envíos</a>
         </nav>
 
@@ -816,7 +860,6 @@
 
       <nav class="mobile-nav" id="mobileNav" aria-label="Menú móvil">
         <a href="#productos" class="nav-link">Productos</a>
-        <a href="#como-pedir" class="nav-link">Cómo pedir</a>
         <a href="#envios" class="nav-link">Envíos</a>
         <a href="#" class="nav-link" id="mobileCartLink">Mi pedido</a>
       </nav>
@@ -835,7 +878,7 @@
         <p class="hero-tagline">Budines caseros hechos con amor, ideales para acompañar el mate.</p>
         <div class="hero-cta">
           <a href="#productos" class="btn-primary">Ver productos</a>
-          <a href="#como-pedir" class="btn-secondary">Cómo pedir</a>
+          <a href="#envios" class="btn-secondary">Datos de envío</a>
         </div>
       </div>
     </section>
@@ -844,7 +887,7 @@
     <section class="section" aria-labelledby="categorias-title">
       <div class="container">
         <h2 class="section-title" id="categorias-title">Explorá</h2>
-        <p class="section-subtitle">Todo lo que necesitás saber sobre nuestros budines</p>
+        <p class="section-subtitle">Elegí tus budines y completá el envío</p>
         <div class="categories">
           <a href="#productos" class="category">
             <div class="category-icon">
@@ -852,17 +895,11 @@
             </div>
             <p class="category-name">Productos</p>
           </a>
-          <a href="#pedido" class="category" id="catPedidos">
+          <a href="#" class="category" id="catPedidos">
             <div class="category-icon">
               <svg viewBox="0 0 48 48" fill="none"><rect x="10" y="18" width="28" height="18" rx="2.5" stroke="#4A3428" stroke-width="1.7"/><path d="M10 22h28" stroke="#4A3428" stroke-width="1.5"/><path d="M16 18V15c0-2 1.5-3.5 3.5-3.5h9c2 0 3.5 1.5 3.5 3.5v3" stroke="#4A3428" stroke-width="1.6"/><path d="M19 36h10" stroke="#E8A9AC" stroke-width="2" stroke-linecap="round"/></svg>
             </div>
             <p class="category-name">Pedidos</p>
-          </a>
-          <a href="#productos" class="category">
-            <div class="category-icon">
-              <svg viewBox="0 0 48 48" fill="none"><path d="M24 10v4M18 14h12l-1.5 18c-.2 2-1.8 3.5-3.8 3.5h-1.4c-2 0-3.6-1.5-3.8-3.5L18 14z" stroke="#4A3428" stroke-width="1.7" stroke-linejoin="round"/><path d="M22 22v7M26 22v7" stroke="#E8A9AC" stroke-width="1.5" stroke-linecap="round"/><circle cx="24" cy="11" r="1.6" fill="#E8A9AC"/></svg>
-            </div>
-            <p class="category-name">Precios</p>
           </a>
           <a href="#envios" class="category">
             <div class="category-icon">
@@ -880,7 +917,6 @@
         <h2 class="section-title" id="productos-title">Nuestros budines</h2>
         <p class="section-subtitle">Especiales y clásicos, ideales para acompañar el mate.</p>
 
-        <!-- ESPECIALES -->
         <div class="product-group">
           <div class="group-header">
             <h3>Budines especiales</h3>
@@ -935,7 +971,6 @@
           </div>
         </div>
 
-        <!-- CLÁSICOS -->
         <div class="product-group">
           <div class="group-header">
             <h3>Budines clásicos</h3>
@@ -992,33 +1027,55 @@
       </div>
     </section>
 
-    <!-- CÓMO PEDIR -->
-    <section class="section" id="como-pedir" aria-labelledby="como-pedir-title">
-      <div class="container">
-        <h2 class="section-title" id="como-pedir-title">Cómo pedir</h2>
-        <p class="section-subtitle">Es muy sencillo</p>
-        <div class="how-to">
-          <h3>Código + cantidad</h3>
-          <p>Agregá los productos a tu pedido desde esta web.</p>
-          <p>Al finalizar, te llevamos a Instagram con el detalle listo para enviar.</p>
-          <div class="example">Ejemplo: A1 x1 + D3 x2</div>
-        </div>
-      </div>
-    </section>
-
     <!-- ENVÍOS -->
     <section class="section" id="envios" aria-labelledby="envios-title">
       <div class="container">
-        <h2 class="section-title" id="envios-title">Envíos y contacto</h2>
-        <p class="section-subtitle">Coordinamos todo por mensaje</p>
-        <div class="info-cards">
-          <div class="info-card">
-            <h4>Envíos</h4>
-            <p>Realizamos envíos en la zona. Consultanos disponibilidad y costo al confirmar tu pedido.</p>
+        <h2 class="section-title" id="envios-title">Datos de envío</h2>
+        <p class="section-subtitle">Completá tu dirección y ubicación. Se enviarán junto con tu pedido por Instagram.</p>
+
+        <div class="delivery-box">
+          <h3>¿Dónde lo enviamos?</h3>
+          <p>Estos datos se incluyen automáticamente al finalizar la compra.</p>
+
+          <div class="form-field">
+            <label for="address">Dirección completa</label>
+            <input class="input" type="text" id="address" name="address" placeholder="Calle, número, piso/depto" autocomplete="street-address">
           </div>
-          <div class="info-card">
-            <h4>Contacto</h4>
-            <p>Escribinos por Instagram. Respondemos a la brevedad para coordinar todo.</p>
+
+          <div class="form-field">
+            <label for="neighborhood">Barrio / Zona</label>
+            <input class="input" type="text" id="neighborhood" name="neighborhood" placeholder="Ej: Palermo, Centro, etc.">
+          </div>
+
+          <div class="form-field">
+            <label for="references">Referencias <span class="hint">(opcional)</span></label>
+            <textarea class="textarea" id="references" name="references" placeholder="Entre calles, color de la puerta, timbre, etc."></textarea>
+          </div>
+
+          <div class="form-field">
+            <label for="mapsLink">Ubicación en Google Maps</label>
+            <span class="hint">Pegá el link de tu ubicación o usá el botón para abrir Maps</span>
+            <input class="input" type="url" id="mapsLink" name="mapsLink" placeholder="https://maps.google.com/...">
+            <div class="maps-actions" style="margin-top: 0.6rem;">
+              <button type="button" class="btn-secondary" id="openMapsBtn">
+                Abrir Google Maps
+              </button>
+              <button type="button" class="btn-secondary" id="previewMapBtn">
+                Ver mapa
+              </button>
+            </div>
+            <div class="map-preview" id="mapPreview">
+              <iframe id="mapIframe" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+            </div>
+          </div>
+
+          <button type="button" class="btn-primary" id="saveDeliveryBtn" style="width:100%; margin-top:0.5rem;">
+            Guardar datos de envío
+          </button>
+
+          <div class="delivery-saved" id="deliverySaved">
+            <strong>✓ Datos guardados</strong>
+            <span id="deliverySavedText"></span>
           </div>
         </div>
       </div>
@@ -1043,10 +1100,12 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
       </button>
     </div>
-    <div class="drawer-body" id="drawerBody">
-      <!-- filled by JS -->
-    </div>
+    <div class="drawer-body" id="drawerBody"></div>
     <div class="drawer-footer" id="drawerFooter" style="display:none;">
+      <div id="deliveryPreview" class="delivery-preview missing">
+        <strong>Envío</strong>
+        <span>Completá los datos de envío en la sección Envíos</span>
+      </div>
       <div class="order-summary" id="orderSummary"></div>
       <div class="order-actions">
         <button class="btn-primary" id="confirmOrder" type="button">
@@ -1056,7 +1115,7 @@
           Vaciar pedido
         </button>
       </div>
-      <p class="order-note">Al finalizar se abrirá Instagram con el detalle de tu pedido listo para enviar.</p>
+      <p class="order-note">Al finalizar se copia el pedido + dirección y se abre el chat de Instagram.</p>
     </div>
   </aside>
 
@@ -1064,7 +1123,13 @@
 
   <script>
     // ========== STATE ==========
-    const order = {}; // { CODE: { name, price, qty } }
+    const order = {};
+    const delivery = {
+      address: '',
+      neighborhood: '',
+      references: '',
+      mapsLink: ''
+    };
 
     // ========== DOM ==========
     const cartBadge = document.getElementById('cartBadge');
@@ -1073,6 +1138,7 @@
     const drawerBody = document.getElementById('drawerBody');
     const drawerFooter = document.getElementById('drawerFooter');
     const orderSummary = document.getElementById('orderSummary');
+    const deliveryPreview = document.getElementById('deliveryPreview');
     const confirmOrderBtn = document.getElementById('confirmOrder');
     const clearOrderBtn = document.getElementById('clearOrder');
     const toast = document.getElementById('toast');
@@ -1080,6 +1146,18 @@
     const closeCartBtn = document.getElementById('closeCartBtn');
     const menuToggle = document.getElementById('menuToggle');
     const mobileNav = document.getElementById('mobileNav');
+
+    const addressInput = document.getElementById('address');
+    const neighborhoodInput = document.getElementById('neighborhood');
+    const referencesInput = document.getElementById('references');
+    const mapsLinkInput = document.getElementById('mapsLink');
+    const saveDeliveryBtn = document.getElementById('saveDeliveryBtn');
+    const deliverySaved = document.getElementById('deliverySaved');
+    const deliverySavedText = document.getElementById('deliverySavedText');
+    const openMapsBtn = document.getElementById('openMapsBtn');
+    const previewMapBtn = document.getElementById('previewMapBtn');
+    const mapPreview = document.getElementById('mapPreview');
+    const mapIframe = document.getElementById('mapIframe');
 
     // ========== HELPERS ==========
     function formatPrice(n) {
@@ -1094,14 +1172,19 @@
       return Object.values(order).reduce((s, i) => s + i.price * i.qty, 0);
     }
 
+    function hasDelivery() {
+      return delivery.address.trim().length > 0;
+    }
+
     function showToast(msg) {
       toast.textContent = msg;
       toast.classList.add('show');
       clearTimeout(showToast._t);
-      showToast._t = setTimeout(() => toast.classList.remove('show'), 2400);
+      showToast._t = setTimeout(() => toast.classList.remove('show'), 2600);
     }
 
     function openCart() {
+      renderCart();
       cartDrawer.classList.add('open');
       cartOverlay.classList.add('open');
       cartDrawer.setAttribute('aria-hidden', 'false');
@@ -1115,15 +1198,30 @@
       document.body.style.overflow = '';
     }
 
+    function updateDeliveryPreview() {
+      if (!hasDelivery()) {
+        deliveryPreview.className = 'delivery-preview missing';
+        deliveryPreview.innerHTML = '<strong>Envío</strong><span>Completá los datos de envío en la sección Envíos</span>';
+        return;
+      }
+      deliveryPreview.className = 'delivery-preview';
+      let text = delivery.address;
+      if (delivery.neighborhood) text += ' — ' + delivery.neighborhood;
+      if (delivery.references) text += '\n' + delivery.references;
+      if (delivery.mapsLink) text += '\n📍 Ubicación guardada';
+      deliveryPreview.innerHTML = '<strong>Envío</strong><span style="white-space:pre-line">' + text.replace(/</g, '&lt;') + '</span>';
+    }
+
     // ========== RENDER CART ==========
     function renderCart() {
       const codes = Object.keys(order);
       const totalItems = getTotalItems();
       const totalPrice = getTotalPrice();
 
-      // Badge
       cartBadge.textContent = totalItems;
       cartBadge.dataset.count = totalItems;
+
+      updateDeliveryPreview();
 
       if (codes.length === 0) {
         drawerBody.innerHTML = `
@@ -1162,7 +1260,6 @@
       html += '</ul>';
       drawerBody.innerHTML = html;
 
-      // Summary
       orderSummary.innerHTML = `
         <div class="summary-row">
           <span>Productos</span>
@@ -1188,18 +1285,33 @@
       const total = getTotalPrice();
       const shortCodes = codes.map(c => `${c} x${order[c].qty}`).join(' + ');
 
-      return `Hola Merily! 🧁 Quiero hacer este pedido:
+      let msg = `Hola Merily! 🧁 Quiero hacer este pedido:
 
 ${lines.join('\n')}
 
 Código: ${shortCodes}
-Total: ${formatPrice(total)}
+Total: ${formatPrice(total)}`;
+
+      if (hasDelivery()) {
+        msg += `
+
+📍 DATOS DE ENVÍO
+Dirección: ${delivery.address}`;
+        if (delivery.neighborhood) msg += `
+Barrio: ${delivery.neighborhood}`;
+        if (delivery.references) msg += `
+Referencias: ${delivery.references}`;
+        if (delivery.mapsLink) msg += `
+Ubicación: ${delivery.mapsLink}`;
+      }
+
+      msg += `
 
 ¡Gracias!`;
+      return msg;
     }
 
     // ========== EVENTS ==========
-    // Add product
     document.querySelectorAll('.btn-add').forEach(btn => {
       btn.addEventListener('click', () => {
         const card = btn.closest('.product-card');
@@ -1207,17 +1319,14 @@ Total: ${formatPrice(total)}
         const name = card.dataset.name;
         const price = parseInt(card.dataset.price, 10);
 
-        if (order[code]) {
-          order[code].qty += 1;
-        } else {
-          order[code] = { name, price, qty: 1 };
-        }
+        if (order[code]) order[code].qty += 1;
+        else order[code] = { name, price, qty: 1 };
+
         renderCart();
         showToast(`Agregado: ${code} — ${name}`);
       });
     });
 
-    // Cart item actions (event delegation)
     drawerBody.addEventListener('click', (e) => {
       const btn = e.target.closest('[data-action]');
       if (!btn) return;
@@ -1225,9 +1334,8 @@ Total: ${formatPrice(total)}
       const action = btn.dataset.action;
       if (!order[code]) return;
 
-      if (action === 'plus') {
-        order[code].qty += 1;
-      } else if (action === 'minus') {
+      if (action === 'plus') order[code].qty += 1;
+      else if (action === 'minus') {
         order[code].qty -= 1;
         if (order[code].qty <= 0) delete order[code];
       } else if (action === 'remove') {
@@ -1237,38 +1345,86 @@ Total: ${formatPrice(total)}
       renderCart();
     });
 
-    // Clear
     clearOrderBtn.addEventListener('click', () => {
       Object.keys(order).forEach(k => delete order[k]);
       renderCart();
       showToast('Pedido vaciado');
     });
 
-    // Confirm → Instagram DM + clipboard
     confirmOrderBtn.addEventListener('click', async () => {
-      const message = buildOrderMessage();
-      if (!message) return;
+      if (!Object.keys(order).length) return;
 
-      // 1. Copy to clipboard
+      if (!hasDelivery()) {
+        showToast('Completá la dirección de envío primero');
+        closeCart();
+        document.getElementById('envios').scrollIntoView({ behavior: 'smooth' });
+        addressInput.focus();
+        return;
+      }
+
+      const message = buildOrderMessage();
+
       try {
         await navigator.clipboard.writeText(message);
-        showToast('Pedido copiado ✓ Abriendo Instagram...');
+        showToast('Pedido + dirección copiados ✓ Abriendo Instagram...');
       } catch {
         showToast('Abriendo Instagram...');
       }
 
-      // 2. Open Instagram DM (ig.me opens chat when possible)
-      // Fallback to profile if DM link has issues
-      const igDm = 'https://ig.me/m/merily.pasteleria';
-      const igProfile = 'https://www.instagram.com/merily.pasteleria/';
-
-      // Small delay so toast is visible
       setTimeout(() => {
-        window.open(igDm, '_blank', 'noopener');
-      }, 400);
+        window.open('https://ig.me/m/merily.pasteleria', '_blank', 'noopener');
+      }, 450);
     });
 
-    // Open / close cart
+    // Delivery form
+    saveDeliveryBtn.addEventListener('click', () => {
+      delivery.address = addressInput.value.trim();
+      delivery.neighborhood = neighborhoodInput.value.trim();
+      delivery.references = referencesInput.value.trim();
+      delivery.mapsLink = mapsLinkInput.value.trim();
+
+      if (!delivery.address) {
+        showToast('Ingresá al menos la dirección');
+        addressInput.focus();
+        return;
+      }
+
+      let summary = delivery.address;
+      if (delivery.neighborhood) summary += ', ' + delivery.neighborhood;
+      deliverySavedText.textContent = summary;
+      deliverySaved.classList.add('active');
+      updateDeliveryPreview();
+      showToast('Datos de envío guardados');
+    });
+
+    openMapsBtn.addEventListener('click', () => {
+      const q = [addressInput.value, neighborhoodInput.value].filter(Boolean).join(', ');
+      const url = q
+        ? 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(q)
+        : 'https://www.google.com/maps';
+      window.open(url, '_blank', 'noopener');
+    });
+
+    previewMapBtn.addEventListener('click', () => {
+      const link = mapsLinkInput.value.trim();
+      const q = [addressInput.value, neighborhoodInput.value].filter(Boolean).join(', ');
+
+      let embedSrc = '';
+      if (link.includes('maps') || link.includes('goo.gl') || link.includes('maps.app')) {
+        // Try to use the link; for many share links, search embed works better with query
+        embedSrc = 'https://maps.google.com/maps?q=' + encodeURIComponent(link) + '&output=embed';
+      } else if (q) {
+        embedSrc = 'https://maps.google.com/maps?q=' + encodeURIComponent(q) + '&output=embed';
+      } else {
+        showToast('Escribí una dirección o pegá un link de Maps');
+        return;
+      }
+
+      mapIframe.src = embedSrc;
+      mapPreview.classList.add('active');
+    });
+
+    // Cart open/close
     openCartBtn.addEventListener('click', openCart);
     closeCartBtn.addEventListener('click', closeCart);
     cartOverlay.addEventListener('click', closeCart);
@@ -1284,7 +1440,6 @@ Total: ${formatPrice(total)}
       openCart();
     });
 
-    // Mobile menu
     menuToggle.addEventListener('click', () => {
       const open = menuToggle.getAttribute('aria-expanded') === 'true';
       menuToggle.setAttribute('aria-expanded', !open);
@@ -1298,12 +1453,10 @@ Total: ${formatPrice(total)}
       });
     });
 
-    // Escape closes cart
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeCart();
     });
 
-    // Initial render
     renderCart();
   </script>
 </body>
