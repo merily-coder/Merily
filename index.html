@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Merily — Pastelería artesanal</title>
+  <meta name="description" content="Budines caseros artesanales. Especiales y clásicos hechos con amor.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Brand */
+      --color-cream: #FBF3ED;
+      --color-pink: #E8A9AC;
+      --color-brown: #4A3428;
+      /* Variaciones */
+      --color-brown-soft: #6A5145;
+      --color-pink-light: #F3D5D6;
+      --color-cream-light: #FFF9F5;
+      --color-white: #FFFFFF;
+      /* Estados */
+      --color-success: #71866A;
+      --color-error: #A65D5D;
+      /* Tipografía */
+      --font-heading: "Cormorant Garamond", Georgia, serif;
+      --font-body: "Lora", Georgia, serif;
+      /* Escala tipográfica */
+      --text-xs: 0.75rem;
+      --text-sm: 0.875rem;
+      --text-md: 1rem;
+      --text-lg: 1.125rem;
+      --text-xl: 1.5rem;
+      --text-2xl: 2rem;
+      --text-3xl: 2.5rem;
+      /* Espaciado */
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-5: 1.25rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-10: 2.5rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+      /* Radius */
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --radius-pill: 999px;
+      /* Sombra */
+      --shadow-soft: 0 4px 16px rgba(74, 52, 40, 0.08);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--color-cream);
+      color: var(--color-brown);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    .container {
+      width: min(100% - 2rem, 1100px);
+      margin-inline: auto;
+    }
+
+    @media (min-width: 768px) {
+      .container {
+        width: min(100% - 4rem, 1100px);
+      }
+    }
+
+    /* ========== HEADER ========== */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--color-cream);
+      border-bottom: 1px solid var(--color-pink-light);
+      padding: 0.85rem 0;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-heading);
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--color-brown);
+    }
+
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      border: 1.5px solid var(--color-pink);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--color-cream-light);
+      flex-shrink: 0;
+    }
+
+    .logo-icon svg {
+      width: 26px;
+      height: 26px;
+    }
+
+    .nav {
+      display: none;
+      gap: 1.75rem;
+      align-items: center;
+    }
+
+    .nav-link {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--color-brown);
+      transition: color 180ms ease;
+      position: relative;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--color-pink);
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 1.5px;
+      background: var(--color-pink);
+      transition: width 180ms ease;
+    }
+
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    .menu-toggle {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      padding: 8px;
+      border-radius: var(--radius-sm);
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--color-brown);
+      border-radius: 2px;
+      transition: all 180ms ease;
+    }
+
+    .menu-toggle[aria-expanded="true"] span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .menu-toggle[aria-expanded="true"] span:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-toggle[aria-expanded="true"] span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding: 1rem 0 0.5rem;
+      border-top: 1px solid var(--color-pink-light);
+      margin-top: 0.75rem;
+    }
+
+    .mobile-nav.open {
+      display: flex;
+    }
+
+    .mobile-nav .nav-link {
+      padding: 0.65rem 0;
+      font-size: 1.05rem;
+    }
+
+    @media (min-width: 768px) {
+      .nav { display: flex; }
+      .menu-toggle { display: none; }
+      .mobile-nav { display: none !important; }
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      padding: clamp(3rem, 10vw, 5.5rem) 0 clamp(2.5rem, 8vw, 4rem);
+      text-align: center;
+    }
+
+    .hero-logo {
+      width: 110px;
+      height: 110px;
+      border: 2px solid var(--color-pink);
+      border-radius: 50%;
+      background: var(--color-cream-light);
+      display: grid;
+      place-items: center;
+      margin: 0 auto 1.5rem;
+    }
+
+    .hero-logo svg {
+      width: 64px;
+      height: 64px;
+    }
+
+    .hero h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(2.4rem, 7vw, 3.4rem);
+      font-weight: 600;
+      line-height: 1.1;
+      color: var(--color-brown);
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-heading);
+      font-size: clamp(1.15rem, 3vw, 1.45rem);
+      font-weight: 500;
+      color: var(--color-brown-soft);
+      margin-bottom: 0.4rem;
+    }
+
+    .hero-tagline {
+      font-size: 1rem;
+      color: var(--color-brown-soft);
+      margin-bottom: 2rem;
+      max-width: 360px;
+      margin-inline: auto;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      justify-content: center;
+    }
+
+    /* ========== BOTONES ========== */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      background: var(--color-pink);
+      color: var(--color-brown);
+      border: 1px solid var(--color-pink);
+      border-radius: var(--radius-pill);
+      padding: 0.8rem 1.5rem;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 180ms ease, transform 180ms ease;
+      min-height: 46px;
+    }
+
+    .btn-primary:hover {
+      background: var(--color-pink-light);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      color: var(--color-brown);
+      border: 1.5px solid var(--color-pink);
+      border-radius: var(--radius-pill);
+      padding: 0.8rem 1.5rem;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 180ms ease, transform 180ms ease;
+      min-height: 46px;
+    }
+
+    .btn-secondary:hover {
+      background: var(--color-pink-light);
+      transform: translateY(-1px);
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--color-pink);
+      outline-offset: 3px;
+    }
+
+    /* ========== CATEGORÍAS ========== */
+    .section {
+      padding-block: clamp(2.5rem, 7vw, 4.5rem);
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.7rem, 4.5vw, 2.2rem);
+      font-weight: 600;
+      color: var(--color-brown);
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--color-brown-soft);
+      font-size: 1rem;
+      margin-bottom: 2.5rem;
+      max-width: 480px;
+      margin-inline: auto;
+    }
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.75rem 1rem;
+      max-width: 520px;
+      margin-inline: auto;
+    }
+
+    @media (min-width: 600px) {
+      .categories {
+        grid-template-columns: repeat(4, 1fr);
+        max-width: 700px;
+        gap: 1.5rem;
+      }
+    }
+
+    .category {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-3);
+      text-align: center;
+      transition: transform 180ms ease;
+    }
+
+    .category:hover {
+      transform: translateY(-3px);
+    }
+
+    .category-icon {
+      width: 92px;
+      height: 92px;
+      border: 1.5px solid var(--color-pink);
+      border-radius: 50%;
+      background: var(--color-cream-light);
+      display: grid;
+      place-items: center;
+      transition: border-color 180ms ease, background 180ms ease;
+    }
+
+    .category:hover .category-icon {
+      border-color: var(--color-pink);
+      background: #fff;
+    }
+
+    .category-icon svg {
+      width: 48px;
+      height: 48px;
+    }
+
+    .category-name {
+      margin: 0;
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--color-brown);
+    }
+
+    /* ========== PRODUCTOS ========== */
+    .products-intro {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .products-intro p {
+      color: var(--color-brown-soft);
+      max-width: 420px;
+      margin-inline: auto;
+    }
+
+    .product-group {
+      margin-bottom: 3.5rem;
+    }
+
+    .product-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .group-header {
+      text-align: center;
+      margin-bottom: 1.75rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--color-pink-light);
+    }
+
+    .group-header h3 {
+      font-family: var(--font-heading);
+      font-size: clamp(1.4rem, 3.5vw, 1.75rem);
+      font-weight: 600;
+      color: var(--color-brown);
+      margin-bottom: 0.35rem;
+    }
+
+    .group-header .price-note {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      color: var(--color-brown-soft);
+      font-style: italic;
+    }
+
+    .group-header .base-note {
+      font-size: 0.9rem;
+      color: var(--color-brown-soft);
+      margin-top: 0.35rem;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-5);
+    }
+
+    @media (min-width: 600px) {
+      .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 992px) {
+      .products-grid.especiales {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .products-grid.clasicos {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .product-card {
+      background: var(--color-cream-light);
+      border: 1px solid var(--color-pink-light);
+      border-radius: var(--radius-lg);
+      padding: 1.35rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .product-code {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--color-brown);
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .dot-red { background: #C97B7B; }
+    .dot-orange { background: #D4A574; }
+    .dot-yellow { background: #E0C36A; }
+    .dot-brown { background: #8B6B5A; }
+    .dot-white { background: #F5EDE6; border: 1px solid #D4C4B5; }
+
+    .product-name {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--color-brown);
+      line-height: 1.25;
+    }
+
+    .product-desc {
+      font-size: 0.9rem;
+      color: var(--color-brown-soft);
+      line-height: 1.5;
+      flex-grow: 1;
+    }
+
+    .product-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--color-pink-light);
+    }
+
+    .product-price {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--color-brown);
+    }
+
+    .btn-add {
+      background: var(--color-pink);
+      color: var(--color-brown);
+      border: 1px solid var(--color-pink);
+      border-radius: var(--radius-pill);
+      padding: 0.45rem 0.95rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: background 180ms ease;
+      white-space: nowrap;
+    }
+
+    .btn-add:hover {
+      background: var(--color-pink-light);
+    }
+
+    /* ========== CÓMO PEDIR ========== */
+    .how-to {
+      background: var(--color-cream-light);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--color-pink-light);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      max-width: 520px;
+      margin-inline: auto;
+    }
+
+    .how-to h3 {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--color-brown);
+      margin-bottom: 0.75rem;
+    }
+
+    .how-to p {
+      color: var(--color-brown-soft);
+      margin-bottom: 0.5rem;
+    }
+
+    .how-to .example {
+      display: inline-block;
+      background: var(--color-pink-light);
+      color: var(--color-brown);
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 1.05rem;
+      padding: 0.55rem 1.15rem;
+      border-radius: var(--radius-md);
+      margin-top: 0.75rem;
+    }
+
+    /* ========== PEDIDO / CARRITO ========== */
+    .order-section {
+      background: linear-gradient(180deg, var(--color-cream) 0%, var(--color-cream-light) 100%);
+    }
+
+    .order-box {
+      background: var(--color-white);
+      border: 1px solid var(--color-pink-light);
+      border-radius: var(--radius-xl);
+      padding: 1.75rem 1.5rem;
+      max-width: 480px;
+      margin-inline: auto;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .order-box h3 {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 1.25rem;
+    }
+
+    .order-list {
+      list-style: none;
+      margin-bottom: 1.25rem;
+    }
+
+    .order-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.65rem 0;
+      border-bottom: 1px solid var(--color-pink-light);
+      font-size: 0.95rem;
+    }
+
+    .order-item:last-child {
+      border-bottom: none;
+    }
+
+    .order-item-name {
+      font-weight: 500;
+    }
+
+    .order-item-qty {
+      color: var(--color-brown-soft);
+      font-size: 0.9rem;
+    }
+
+    .order-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1rem;
+      border-top: 2px solid var(--color-pink);
+      margin-bottom: 1.5rem;
+    }
+
+    .order-total span:first-child {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .order-total .total-price {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-brown);
+    }
+
+    .order-empty {
+      text-align: center;
+      color: var(--color-brown-soft);
+      padding: 1.5rem 0;
+      font-size: 0.95rem;
+    }
+
+    .order-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .order-actions .btn-primary {
+      width: 100%;
+    }
+
+    /* ========== CONTACTO / ENVÍOS ========== */
+    .info-cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      max-width: 700px;
+      margin-inline: auto;
+    }
+
+    @media (min-width: 600px) {
+      .info-cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .info-card {
+      background: var(--color-cream-light);
+      border: 1px solid var(--color-pink-light);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem 1.25rem;
+      text-align: center;
+    }
+
+    .info-card h4 {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .info-card p {
+      font-size: 0.95rem;
+      color: var(--color-brown-soft);
+    }
+
+    /* ========== FOOTER ========== */
+    .footer {
+      padding: 2.5rem 0 2rem;
+      border-top: 1px solid var(--color-pink-light);
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--color-brown);
+      margin-bottom: 0.4rem;
+    }
+
+    .footer p {
+      font-size: 0.9rem;
+      color: var(--color-brown-soft);
+      margin-bottom: 0.25rem;
+    }
+
+    .footer-handle {
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      color: var(--color-pink);
+      margin-top: 0.75rem;
+    }
+
+    /* ========== UTILITIES ========== */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      border: 0;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--color-brown);
+      color: var(--color-cream);
+      padding: 0.75rem 1.35rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.9rem;
+      font-weight: 500;
+      opacity: 0;
+      transition: transform 280ms ease, opacity 280ms ease;
+      z-index: 200;
+      pointer-events: none;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="#" class="logo" aria-label="Merily - Inicio">
+          <span class="logo-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14 32c0-2 1.5-4 4-5.5 1.5-1 3-1.5 5-1.5s3.5.5 5 1.5c2.5 1.5 4 3.5 4 5.5" stroke="#4A3428" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M16 28c0-6 3.5-11 8-13 4.5 2 8 7 8 13" stroke="#4A3428" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M18 26c1-4 3-7 6-8.5 3 1.5 5 4.5 6 8.5" stroke="#E8A9AC" stroke-width="1.6" stroke-linecap="round"/>
+              <ellipse cx="24" cy="34" rx="9" ry="3.5" stroke="#4A3428" stroke-width="1.6"/>
+              <path d="M15 34v2.5c0 1.5 4 2.5 9 2.5s9-1 9-2.5V34" stroke="#4A3428" stroke-width="1.6"/>
+              <path d="M22.5 16.5c0-1.2 1-2 2-1.8.8.2 1.3 1 1.3 1.8" stroke="#E8A9AC" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="24.2" cy="14.2" r="1.6" fill="#E8A9AC"/>
+            </svg>
+          </span>
+          Merily
+        </a>
+
+        <nav class="nav" aria-label="Navegación principal">
+          <a href="#productos" class="nav-link">Productos</a>
+          <a href="#como-pedir" class="nav-link">Cómo pedir</a>
+          <a href="#pedido" class="nav-link">Mi pedido</a>
+          <a href="#envios" class="nav-link">Envíos</a>
+        </nav>
+
+        <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false" id="menuToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+      <nav class="mobile-nav" id="mobileNav" aria-label="Menú móvil">
+        <a href="#productos" class="nav-link">Productos</a>
+        <a href="#como-pedir" class="nav-link">Cómo pedir</a>
+        <a href="#pedido" class="nav-link">Mi pedido</a>
+        <a href="#envios" class="nav-link">Envíos</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-logo" aria-hidden="true">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18 42c0-2.5 2-5.5 5.5-7.5 2-1.2 4-2 6.5-2s4.5.8 6.5 2c3.5 2 5.5 5 5.5 7.5" stroke="#4A3428" stroke-width="2" stroke-linecap="round"/>
+            <path d="M20 37c0-8 4.5-14.5 10.5-17.5 6 3 10.5 9.5 10.5 17.5" stroke="#4A3428" stroke-width="2" stroke-linecap="round"/>
+            <path d="M23 34c1.5-5.5 4-9.5 8-11.5 4 2 6.5 6 8 11.5" stroke="#E8A9AC" stroke-width="1.8" stroke-linecap="round"/>
+            <ellipse cx="32" cy="45" rx="12" ry="4.5" stroke="#4A3428" stroke-width="1.8"/>
+            <path d="M20 45v3.5c0 2 5.5 3.5 12 3.5s12-1.5 12-3.5V45" stroke="#4A3428" stroke-width="1.8"/>
+            <path d="M29.5 22c0-1.6 1.4-2.7 2.7-2.4 1.1.3 1.8 1.4 1.8 2.4" stroke="#E8A9AC" stroke-width="1.7" stroke-linecap="round"/>
+            <circle cx="32.3" cy="18.8" r="2.2" fill="#E8A9AC"/>
+          </svg>
+        </div>
+        <h1>Merily</h1>
+        <p class="hero-subtitle">Pastelería artesanal</p>
+        <p class="hero-tagline">Budines caseros hechos con amor, ideales para acompañar el mate.</p>
+        <div class="hero-cta">
+          <a href="#productos" class="btn-primary">Ver productos</a>
+          <a href="#como-pedir" class="btn-secondary">Cómo pedir</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATEGORÍAS -->
+    <section class="section" aria-labelledby="categorias-title">
+      <div class="container">
+        <h2 class="section-title" id="categorias-title">Explorá</h2>
+        <p class="section-subtitle">Todo lo que necesitás saber sobre nuestros budines</p>
+
+        <div class="categories">
+          <a href="#productos" class="category">
+            <div class="category-icon">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14 30c0-2 1.5-4 4-5.5 1.5-1 3-1.5 5-1.5s3.5.5 5 1.5c2.5 1.5 4 3.5 4 5.5" stroke="#4A3428" stroke-width="1.7" stroke-linecap="round"/>
+                <path d="M16 26c0-5.5 3.2-10 7.2-12 4 2 7.2 6.5 7.2 12" stroke="#4A3428" stroke-width="1.7" stroke-linecap="round"/>
+                <path d="M18 24c1-3.5 2.8-6.2 5.2-7.5 2.4 1.3 4.2 4 5.2 7.5" stroke="#E8A9AC" stroke-width="1.5" stroke-linecap="round"/>
+                <ellipse cx="23.5" cy="32" rx="8" ry="3" stroke="#4A3428" stroke-width="1.5"/>
+                <path d="M15.5 32v2c0 1.2 3.5 2.2 8 2.2s8-1 8-2.2v-2" stroke="#4A3428" stroke-width="1.5"/>
+                <circle cx="23.8" cy="14.5" r="1.5" fill="#E8A9AC"/>
+              </svg>
+            </div>
+            <p class="category-name">Productos</p>
+          </a>
+
+          <a href="#pedido" class="category">
+            <div class="category-icon">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="10" y="18" width="28" height="18" rx="2.5" stroke="#4A3428" stroke-width="1.7"/>
+                <path d="M10 22h28" stroke="#4A3428" stroke-width="1.5"/>
+                <path d="M16 18V15c0-2 1.5-3.5 3.5-3.5h9c2 0 3.5 1.5 3.5 3.5v3" stroke="#4A3428" stroke-width="1.6"/>
+                <path d="M18 28c0-1.5 1.2-2.8 2.8-3 1.4.2 2.4 1.4 2.4 2.8" stroke="#E8A9AC" stroke-width="1.4" stroke-linecap="round"/>
+                <path d="M26 28c0-1.5 1.2-2.8 2.8-3 1.4.2 2.4 1.4 2.4 2.8" stroke="#E8A9AC" stroke-width="1.4" stroke-linecap="round"/>
+                <path d="M20 32.5c1.2 1.2 2.8 1.2 4 0" stroke="#E8A9AC" stroke-width="1.4" stroke-linecap="round"/>
+                <path d="M28 32.5c1.2 1.2 2.8 1.2 4 0" stroke="#E8A9AC" stroke-width="1.4" stroke-linecap="round"/>
+                <path d="M19 36h10" stroke="#E8A9AC" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <p class="category-name">Pedidos</p>
+          </a>
+
+          <a href="#productos" class="category">
+            <div class="category-icon">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18 14c0-1.5 1.2-2.8 2.8-3h6.4c1.6.2 2.8 1.5 2.8 3v2H18v-2z" stroke="#4A3428" stroke-width="1.6"/>
+                <path d="M16 16h16l-1.5 18c-.2 2-1.8 3.5-3.8 3.5H21.3c-2 0-3.6-1.5-3.8-3.5L16 16z" stroke="#4A3428" stroke-width="1.7"/>
+                <path d="M22 22v8M26 22v8" stroke="#E8A9AC" stroke-width="1.5" stroke-linecap="round"/>
+                <circle cx="24" cy="12" r="1.8" fill="#E8A9AC"/>
+              </svg>
+            </div>
+            <p class="category-name">Precios</p>
+          </a>
+
+          <a href="#envios" class="category">
+            <div class="category-icon">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="14" cy="34" r="4" stroke="#4A3428" stroke-width="1.6"/>
+                <circle cx="34" cy="34" r="4" stroke="#4A3428" stroke-width="1.6"/>
+                <path d="M18 34h12" stroke="#4A3428" stroke-width="1.5"/>
+                <path d="M10 34H8c-1.5 0-2.5-1.2-2.5-2.5V24c0-2 1.5-3.5 3.5-3.5h8l3-6h10c2 0 3.5 1.5 3.5 3.5v10c0 1.5-1 2.5-2.5 2.5h-1.5" stroke="#4A3428" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M18 14.5h8" stroke="#E8A9AC" stroke-width="1.5" stroke-linecap="round"/>
+                <rect x="28" y="12" width="10" height="8" rx="1.5" stroke="#4A3428" stroke-width="1.5"/>
+                <circle cx="33" cy="16" r="1.5" fill="#E8A9AC"/>
+              </svg>
+            </div>
+            <p class="category-name">Envíos</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUCTOS -->
+    <section class="section" id="productos" aria-labelledby="productos-title">
+      <div class="container">
+        <div class="products-intro">
+          <h2 class="section-title" id="productos-title">Nuestros budines</h2>
+          <p>Especiales y clásicos, ideales para acompañar el mate. Elegí tus favoritos y armá tu pedido.</p>
+        </div>
+
+        <!-- ESPECIALES -->
+        <div class="product-group">
+          <div class="group-header">
+            <h3>Budines especiales</h3>
+            <p class="base-note">Base de harina integral, de coco y de almendras</p>
+          </div>
+
+          <div class="products-grid especiales">
+            <article class="product-card" data-code="A1" data-name="Manzana con nueces" data-price="7000">
+              <div class="product-code">
+                <span class="dot dot-red"></span> A1
+              </div>
+              <h4 class="product-name">Manzana con nueces</h4>
+              <p class="product-desc">Manzana roja rallada, manzana verde en cubitos y nueces.</p>
+              <div class="product-footer">
+                <span class="product-price">$7.000</span>
+                <button class="btn-add" type="button" data-add="A1">Agregar</button>
+              </div>
+            </article>
+
+            <article class="product-card" data-code="A2" data-name="Manzana sin nueces" data-price="7000">
+              <div class="product-code">
+                <span class="dot dot-red"></span> A2
+              </div>
+              <h4 class="product-name">Manzana sin nueces</h4>
+              <p class="product-desc">Manzana roja rallada y manzana verde en cubitos.</p>
+              <div class="product-footer">
+                <span class="product-price">$7.000</span>
+                <button class="btn-add" type="button" data-add="A2">Agregar</button>
+              </div>
+            </article>
+
+            <article class="product-card" data-code="B1" data-name="Zanahoria" data-price="7000">
+              <div class="product-code">
+                <span class="dot dot-orange"></span> B1
+              </div>
+              <h4 class="product-name">Zanahoria</h4>
+              <p class="product-desc">Con zanahoria, sin frutos secos.</p>
+              <div class="product-footer">
+                <span class="product-price">$7.000</span>
+                <button class="btn-add" type="button" data-add="B1">Agregar</button>
+              </div>
+            </article>
+
+            <article class="product-card" data-code="B2" data-name="Zanahoria con frutos secos" data-price="9000">
+              <div class="product-code">
+                <span class="dot dot-orange"></span> B2
+              </div>
+              <h4 class="product-name">Zanahoria con frutos secos</h4>
+              <p class="product-desc">Zanahoria con frutos secos.</p>
+              <div class="product-footer">
+                <span class="product-price">$9.000</span>
+                <button class="btn-add" type="button" data-add="B2">Agregar</button>
+              </div>
+            </article>
+
+            <article class="product-card" data-code="C1" data-name="Vainilla con chips de chocolate" data-price="7000">
+              <div class="product-code">
+                <span class="dot dot-brown"></span> C1
+              </div>
+              <h4 class="product-name">Vainilla con chips de chocolate</h4>
+              <p class="product-desc">Suave vainilla con chips de chocolate.</p>
+              <div class="product-footer">
+                <span class="product-price">$7.000</span>
+                <button class="btn-add" type="button" data-add="C1">Agregar</button>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <!-- CLÁSICOS -->
+        <div class="product-group">
+          <div class="group-header">
+            <h3>Budines clásicos</h3>
+            <p class="price-note">$6.000 cada uno</p>
+          </div>
+
+          <div class="products-grid clasicos">
+            <article class="product-card" data-code="D1" data-name="Naranja" data-price="6000">
+              <div class="product-code">
+                <span class="dot dot-orange"></span> D1
+              </div>
+              <h4 class="product-name">Naranja</h4>
+              <p class="product-desc">Clásico de naranja, aromático y suave.</p>
+              <div class="product-footer">
+                <span class="product-price">$6.000</span>
+                <button class="btn-add" type="button" data-add="D1">Agregar</button>
+              </div>
+            </article>
+
+            <article class="product-card" data-code="D2" data-name="Naranja con chips de chocolate" data-price="6000">
+              <div class="product-code">
+                <span class="dot dot-brown"></span> D2
+              </div>
+              <h4 class="product-name">Naranja con chips de chocolate</h4>
+              <p class="product-desc">Naranja con deliciosos chips de chocolate.</p>
+              <div class="product-footer">
+                <span class="product-price">$6.000</span>
+                <button class="btn-add" type="button" data-add="D2">Agregar</button>
+              </div>
+            </article>
+
+            <article class="product-card" data-code="D3" data-name="Limón con glaseado" data-price="6000">
+              <div class="product-code">
+                <span class="dot dot-yellow"></span> D3
+              </div>
+              <h4 class="product-name">Limón con glaseado</h4>
+              <p class="product-desc">Refrescante limón con glaseado.</p>
+              <div class="product-footer">
+                <span class="product-price">$6.000</span>
+                <button class="btn-add" type="button" data-add="D3">Agregar</button>
+              </div>
+            </article>
+
+            <article class="product-card" data-code="D4" data-name="Marmolado" data-price="6000">
+              <div class="product-code">
+                <span class="dot dot-brown"></span> D4
+              </div>
+              <h4 class="product-name">Marmolado</h4>
+              <p class="product-desc">Clásico marmolado de chocolate y vainilla.</p>
+              <div class="product-footer">
+                <span class="product-price">$6.000</span>
+                <button class="btn-add" type="button" data-add="D4">Agregar</button>
+              </div>
+            </article>
+
+            <article class="product-card" data-code="D5" data-name="Vainilla" data-price="6000">
+              <div class="product-code">
+                <span class="dot dot-white"></span> D5
+              </div>
+              <h4 class="product-name">Vainilla</h4>
+              <p class="product-desc">Suave y clásico de vainilla.</p>
+              <div class="product-footer">
+                <span class="product-price">$6.000</span>
+                <button class="btn-add" type="button" data-add="D5">Agregar</button>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CÓMO PEDIR -->
+    <section class="section" id="como-pedir" aria-labelledby="como-pedir-title">
+      <div class="container">
+        <h2 class="section-title" id="como-pedir-title">Cómo pedir</h2>
+        <p class="section-subtitle">Es muy sencillo</p>
+
+        <div class="how-to">
+          <h3>Código + cantidad</h3>
+          <p>Indicá el código de la opción que querés y la cantidad.</p>
+          <p>Podés combinar varios en el mismo mensaje.</p>
+          <div class="example">Ejemplo: A1 x1 + D3 x2</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MI PEDIDO -->
+    <section class="section order-section" id="pedido" aria-labelledby="pedido-title">
+      <div class="container">
+        <h2 class="section-title" id="pedido-title">Mi pedido</h2>
+        <p class="section-subtitle">Revisá y confirmá tu selección</p>
+
+        <div class="order-box">
+          <h3>Resumen</h3>
+          <ul class="order-list" id="orderList">
+            <li class="order-empty" id="orderEmpty">Todavía no agregaste nada.<br>Elegí tus budines favoritos.</li>
+          </ul>
+          <div class="order-total" id="orderTotal" style="display: none;">
+            <span>Total</span>
+            <span class="total-price" id="totalPrice">$0</span>
+          </div>
+          <div class="order-actions">
+            <button class="btn-primary" id="confirmOrder" type="button" disabled>
+              Confirmar pedido
+            </button>
+            <button class="btn-secondary" id="clearOrder" type="button" style="display: none;">
+              Vaciar pedido
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ENVÍOS -->
+    <section class="section" id="envios" aria-labelledby="envios-title">
+      <div class="container">
+        <h2 class="section-title" id="envios-title">Envíos y contacto</h2>
+        <p class="section-subtitle">Coordinamos todo por mensaje</p>
+
+        <div class="info-cards">
+          <div class="info-card">
+            <h4>Envíos</h4>
+            <p>Realizamos envíos en la zona. Consultanos disponibilidad y costo al momento de confirmar tu pedido.</p>
+          </div>
+          <div class="info-card">
+            <h4>Pedidos</h4>
+            <p>Escribinos por Instagram o WhatsApp con el código + cantidad. ¡Te respondemos a la brevedad!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p class="footer-logo">Merily</p>
+      <p>Pastelería artesanal hecha con amor</p>
+      <p class="footer-handle">@merily.pasteleria</p>
+    </div>
+  </footer>
+
+  <!-- Toast -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    // Mobile menu
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileNav = document.getElementById('mobileNav');
+
+    menuToggle.addEventListener('click', () => {
+      const open = menuToggle.getAttribute('aria-expanded') === 'true';
+      menuToggle.setAttribute('aria-expanded', !open);
+      mobileNav.classList.toggle('open');
+    });
+
+    mobileNav.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        menuToggle.setAttribute('aria-expanded', 'false');
+        mobileNav.classList.remove('open');
+      });
+    });
+
+    // Order state
+    const order = {};
+    const orderList = document.getElementById('orderList');
+    const orderEmpty = document.getElementById('orderEmpty');
+    const orderTotal = document.getElementById('orderTotal');
+    const totalPrice = document.getElementById('totalPrice');
+    const confirmOrder = document.getElementById('confirmOrder');
+    const clearOrder = document.getElementById('clearOrder');
+    const toast = document.getElementById('toast');
+
+    function formatPrice(n) {
+      return '$' + n.toLocaleString('es-AR');
+    }
+
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2200);
+    }
+
+    function renderOrder() {
+      const codes = Object.keys(order);
+      if (codes.length === 0) {
+        orderList.innerHTML = '<li class="order-empty" id="orderEmpty">Todavía no agregaste nada.<br>Elegí tus budines favoritos.</li>';
+        orderTotal.style.display = 'none';
+        confirmOrder.disabled = true;
+        clearOrder.style.display = 'none';
+        return;
+      }
+
+      let total = 0;
+      let html = '';
+      codes.forEach(code => {
+        const item = order[code];
+        const subtotal = item.price * item.qty;
+        total += subtotal;
+        html += `
+          <li class="order-item">
+            <div>
+              <span class="order-item-name">${code} — ${item.name}</span>
+              <span class="order-item-qty"> × ${item.qty}</span>
+            </div>
+            <span>${formatPrice(subtotal)}</span>
+          </li>`;
+      });
+
+      orderList.innerHTML = html;
+      totalPrice.textContent = formatPrice(total);
+      orderTotal.style.display = 'flex';
+      confirmOrder.disabled = false;
+      clearOrder.style.display = 'block';
+    }
+
+    document.querySelectorAll('.btn-add').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const card = btn.closest('.product-card');
+        const code = card.dataset.code;
+        const name = card.dataset.name;
+        const price = parseInt(card.dataset.price, 10);
+
+        if (order[code]) {
+          order[code].qty += 1;
+        } else {
+          order[code] = { name, price, qty: 1 };
+        }
+        renderOrder();
+        showToast(`Agregado: ${code} — ${name}`);
+      });
+    });
+
+    clearOrder.addEventListener('click', () => {
+      Object.keys(order).forEach(k => delete order[k]);
+      renderOrder();
+      showToast('Pedido vaciado');
+    });
+
+    confirmOrder.addEventListener('click', () => {
+      const codes = Object.keys(order);
+      if (codes.length === 0) return;
+
+      const lines = codes.map(code => {
+        const item = order[code];
+        return `${code} x${item.qty}`;
+      });
+      const message = lines.join(' + ');
+      const text = encodeURIComponent(`Hola Merily! Quiero pedir:\n${message}`);
+      // Instagram / WhatsApp style – open Instagram profile or generic
+      window.open(`https://www.instagram.com/merily.pasteleria/`, '_blank');
+      // Also copy to clipboard
+      navigator.clipboard?.writeText(message).then(() => {
+        showToast('Pedido copiado. Escribinos por Instagram!');
+      }).catch(() => {
+        showToast('Pedido listo: ' + message);
+      });
+    });
+  </script>
+</body>
+</html>
