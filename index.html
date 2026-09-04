@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -824,6 +825,115 @@
       transform: translateX(-50%) translateY(0);
       opacity: 1;
     }
+
+    /* ========== MODAL CONFIRMACIÓN ========== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(74, 52, 40, 0.4);
+      z-index: 400;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 1rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 220ms ease, visibility 220ms ease;
+    }
+    @media (min-width: 560px) {
+      .modal-overlay { align-items: center; }
+    }
+    .modal-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+    .modal {
+      background: var(--color-cream);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--color-pink-light);
+      width: min(100%, 440px);
+      max-height: min(90vh, 640px);
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 12px 40px rgba(74, 52, 40, 0.15);
+      transform: translateY(20px);
+      transition: transform 220ms ease;
+    }
+    .modal-overlay.open .modal { transform: translateY(0); }
+    .modal-header {
+      padding: 1.2rem 1.25rem 0.75rem;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .modal-header h3 {
+      font-family: var(--font-heading);
+      font-size: 1.35rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+    }
+    .modal-header p {
+      font-size: 0.88rem;
+      color: var(--color-brown-soft);
+      line-height: 1.4;
+    }
+    .copied-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      background: var(--color-success);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 0.28rem 0.7rem;
+      border-radius: var(--radius-pill);
+      margin-top: 0.55rem;
+    }
+    .modal-body {
+      padding: 0.5rem 1.25rem 1rem;
+      overflow-y: auto;
+      flex: 1;
+    }
+    .message-preview {
+      background: var(--color-white);
+      border: 1px solid var(--color-pink-light);
+      border-radius: var(--radius-md);
+      padding: 0.9rem 1rem;
+      font-size: 0.84rem;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      color: var(--color-brown);
+      max-height: 220px;
+      overflow-y: auto;
+    }
+    .modal-steps {
+      margin-top: 0.9rem;
+      padding: 0.85rem 1rem;
+      background: var(--color-pink-light);
+      border-radius: var(--radius-md);
+      font-size: 0.86rem;
+      line-height: 1.45;
+    }
+    .modal-steps strong {
+      display: block;
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      margin-bottom: 0.35rem;
+    }
+    .modal-steps ol {
+      margin: 0;
+      padding-left: 1.15rem;
+    }
+    .modal-steps li { margin-bottom: 0.25rem; }
+    .modal-footer {
+      padding: 0.85rem 1.25rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      flex-shrink: 0;
+      border-top: 1px solid var(--color-pink-light);
+    }
+    .modal-footer .btn-primary,
+    .modal-footer .btn-secondary { width: 100%; }
   </style>
 </head>
 <body>
@@ -1031,7 +1141,7 @@
     <section class="section" id="envios" aria-labelledby="envios-title">
       <div class="container">
         <h2 class="section-title" id="envios-title">Datos de envío</h2>
-        <p class="section-subtitle">Completá tu dirección y ubicación. Se enviarán junto con tu pedido por Instagram.</p>
+        <p class="section-subtitle">Completá tu dirección. La ubicación de Maps es opcional y se envía junto con tu pedido.</p>
 
         <div class="delivery-box">
           <h3>¿Dónde lo enviamos?</h3>
@@ -1053,8 +1163,8 @@
           </div>
 
           <div class="form-field">
-            <label for="mapsLink">Ubicación en Google Maps</label>
-            <span class="hint">Pegá el link de tu ubicación o usá el botón para abrir Maps</span>
+            <label for="mapsLink">Ubicación en Google Maps <span class="hint">(opcional)</span></label>
+            <span class="hint">No es obligatorio. Si querés, pegá el link de tu ubicación</span>
             <input class="input" type="url" id="mapsLink" name="mapsLink" placeholder="https://maps.google.com/...">
             <div class="maps-actions" style="margin-top: 0.6rem;">
               <button type="button" class="btn-secondary" id="openMapsBtn">
@@ -1120,6 +1230,34 @@
   </aside>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- MODAL: mensaje listo para Instagram -->
+  <div class="modal-overlay" id="confirmModal" aria-hidden="true">
+    <div class="modal" role="dialog" aria-labelledby="modalTitle">
+      <div class="modal-header">
+        <h3 id="modalTitle">Pedido listo</h3>
+        <p>Instagram no permite pegar el mensaje solo. Copialo y envialo en el chat.</p>
+        <span class="copied-badge" id="copiedBadge">✓ Mensaje copiado</span>
+      </div>
+      <div class="modal-body">
+        <div class="message-preview" id="messagePreview"></div>
+        <div class="modal-steps">
+          <strong>Cómo enviarlo</strong>
+          <ol>
+            <li>Tocá <b>Abrir Instagram</b></li>
+            <li>Entrá al chat de <b>@merily.pasteleria</b></li>
+            <li>Mantené presionado el cuadro de texto y elegí <b>Pegar</b></li>
+            <li>Enviá el mensaje</li>
+          </ol>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-primary" id="openIgBtn">Abrir Instagram</button>
+        <button type="button" class="btn-secondary" id="copyAgainBtn">Copiar mensaje de nuevo</button>
+        <button type="button" class="btn-secondary" id="closeModalBtn">Cerrar</button>
+      </div>
+    </div>
+  </div>
 
   <script>
     // ========== STATE ==========
@@ -1351,6 +1489,52 @@ Ubicación: ${delivery.mapsLink}`;
       showToast('Pedido vaciado');
     });
 
+    const confirmModal = document.getElementById('confirmModal');
+    const messagePreview = document.getElementById('messagePreview');
+    const openIgBtn = document.getElementById('openIgBtn');
+    const copyAgainBtn = document.getElementById('copyAgainBtn');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const copiedBadge = document.getElementById('copiedBadge');
+    let lastMessage = '';
+
+    function openConfirmModal(message, copied) {
+      lastMessage = message;
+      messagePreview.textContent = message;
+      copiedBadge.style.display = copied ? 'inline-flex' : 'none';
+      copiedBadge.textContent = copied ? '✓ Mensaje copiado' : '';
+      confirmModal.classList.add('open');
+      confirmModal.setAttribute('aria-hidden', 'false');
+      closeCart();
+    }
+
+    function closeConfirmModal() {
+      confirmModal.classList.remove('open');
+      confirmModal.setAttribute('aria-hidden', 'true');
+    }
+
+    async function copyMessage(text) {
+      try {
+        await navigator.clipboard.writeText(text);
+        return true;
+      } catch {
+        // Fallback for older browsers / blocked clipboard
+        try {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          ta.setAttribute('readonly', '');
+          ta.style.position = 'fixed';
+          ta.style.left = '-9999px';
+          document.body.appendChild(ta);
+          ta.select();
+          const ok = document.execCommand('copy');
+          document.body.removeChild(ta);
+          return ok;
+        } catch {
+          return false;
+        }
+      }
+    }
+
     confirmOrderBtn.addEventListener('click', async () => {
       if (!Object.keys(order).length) return;
 
@@ -1363,17 +1547,36 @@ Ubicación: ${delivery.mapsLink}`;
       }
 
       const message = buildOrderMessage();
+      const copied = await copyMessage(message);
+      openConfirmModal(message, copied);
 
-      try {
-        await navigator.clipboard.writeText(message);
-        showToast('Pedido + dirección copiados ✓ Abriendo Instagram...');
-      } catch {
-        showToast('Abriendo Instagram...');
+      if (copied) {
+        showToast('Mensaje copiado. Pegalo en el chat de Instagram');
+      } else {
+        showToast('No se pudo copiar. Seleccioná el texto y copialo');
       }
+    });
 
+    openIgBtn.addEventListener('click', () => {
+      // Abre el perfil / chat de Instagram
+      window.open('https://ig.me/m/merily.pasteleria', '_blank', 'noopener');
+      // Fallback por si ig.me falla en algunos dispositivos
       setTimeout(() => {
-        window.open('https://ig.me/m/merily.pasteleria', '_blank', 'noopener');
-      }, 450);
+        // no-op; el usuario ya tiene el mensaje copiado
+      }, 300);
+    });
+
+    copyAgainBtn.addEventListener('click', async () => {
+      if (!lastMessage) return;
+      const ok = await copyMessage(lastMessage);
+      copiedBadge.style.display = 'inline-flex';
+      copiedBadge.textContent = ok ? '✓ Mensaje copiado' : 'Seleccioná el texto y copiá';
+      showToast(ok ? 'Mensaje copiado de nuevo' : 'Copiá el texto del cuadro');
+    });
+
+    closeModalBtn.addEventListener('click', closeConfirmModal);
+    confirmModal.addEventListener('click', (e) => {
+      if (e.target === confirmModal) closeConfirmModal();
     });
 
     // Delivery form
@@ -1454,7 +1657,10 @@ Ubicación: ${delivery.mapsLink}`;
     });
 
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeCart();
+      if (e.key === 'Escape') {
+        closeConfirmModal();
+        closeCart();
+      }
     });
 
     renderCart();
